@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using NUnit.Framework;
+
 
 namespace WpfApp1
 {
@@ -26,7 +27,9 @@ namespace WpfApp1
 
             var ex = Assert.Throws<ArgumentException>(() => gen.isBroken(-1, 15));
             Assert.That(ex.Message, Is.EqualTo("ВЫХОД ЗА ГРАНИЦУ"));
-           
+            var ex1 = Assert.Throws<ArgumentException>(() => gen.isBroken(-1, 15));
+            Assert.That(ex1.Message, Is.EqualTo("ВЫХОД ЗА ГРАНИЦУ"));
+
         }
 
         [TestCase]
@@ -56,8 +59,13 @@ namespace WpfApp1
 
             Assert.AreEqual(false, isBroken);
 
+            var ex2 = Assert.Throws<ArgumentException>(() => gen.plantMines(20));
+            Assert.That(ex2.Message, Is.EqualTo("МНОГО МИН"));
 
-            //exception на количество мин больше максимума и меньше минимума
+            var ex3 = Assert.Throws<ArgumentException>(() => gen.plantMines(2));
+            Assert.That(ex3.Message, Is.EqualTo("МАЛО МИН"));
+
+            
 
         }
     }
