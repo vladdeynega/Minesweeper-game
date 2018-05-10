@@ -8,12 +8,13 @@ namespace WpfApp1
 {
     class CGenerator
     {
-        int[,] field;
+        public int[,] field;
 
-        bool isBroken(int x, int y)
+        public bool isBroken(int x, int y)
         {
             bool res = true;
 
+            if ((x < 0) && (x > field.GetLength(0)-1)) throw new ArgumentException("ВЫХОД ЗА ГРАНИЦУ");
 
             int minx = x - 1;
             if (minx < 0) minx = 0;
@@ -21,7 +22,7 @@ namespace WpfApp1
             if (miny < 0) miny = 0;
 
             int maxx = x + 1;
-            if (maxx > field.GetLength(0)-1) maxx = field.GetLength(0)-1;
+            if (maxx > field.GetLength(0) - 1) maxx = field.GetLength(0) - 1;
             int maxy = y + 1;
             if (maxy > field.GetLength(1) - 1) maxy = field.GetLength(1) - 1;
 
@@ -61,13 +62,18 @@ namespace WpfApp1
                     i--;
                 } else
                     field[x, y] = -1;
-
-                if (isBroken(x, y) == true)
+               
+                for (int i1 = 0; i1 < field.GetLength(0); i1++)
                 {
-                    field[x, y] = 0;
-                    i--;
+                    for (int j1 = 0; j1 < field.GetLength(1); j1++)
+                        if (isBroken(x, y) == true)
+                        {
+                            field[x, y] = 0;
+                            i--;
+                            break;
+                        }
+                    if (field[x, y] == 0) break;
                 }
-
             }
         }
 
