@@ -14,7 +14,11 @@ namespace WpfApp1
         {
             bool res = true;
 
-            if ((x < 0) && (x > field.GetLength(0)-1)) throw new ArgumentException("ВЫХОД ЗА ГРАНИЦУ");
+            if ((x < 0)||(x > field.GetLength(0)-1))
+                throw new ArgumentException("ВЫХОД ЗА ГРАНИЦУ");
+
+            if ((y < 0) || (y > field.GetLength(1) - 1))
+                throw new ArgumentException("ВЫХОД ЗА ГРАНИЦУ");
 
             int minx = x - 1;
             if (minx < 0) minx = 0;
@@ -51,6 +55,11 @@ namespace WpfApp1
         {
             Random kuku = new Random();
             //int m = kuku.Next();
+            if (n > 10) 
+                throw new ArgumentException("МНОГО МИН");
+
+            if (n < 5)
+                throw new ArgumentException("МАЛО МИН");
 
             for (int i = 0; i < n; i++)
             {
