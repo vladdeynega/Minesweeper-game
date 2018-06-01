@@ -5,12 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Background="#FFFFD6EC">
-    <Grid>
-        <Button x:Name="b1" Content="СТАРТ!" HorizontalAlignment="Left" Height="37" Margin="195,22,0,0" VerticalAlignment="Top" Width="97" Click="b1_Click" FontWeight="Bold" Background="#FFDA328E"/>
-<Image Margin="43,10,372,242" Source="Image1.png" Stretch="Fill"/>
+        Title="MainWindow" Height="542" Width="400" Background="#FFD4D4D4">
+    <Grid Margin="0,77.5,0,0">
+        <Button x:Name="b1" Content="Начать игру!" HorizontalAlignment="Left" Height="26.5" Margin="133,-50,0,0" VerticalAlignment="Top" Width="106" Click="b1_Click" FontWeight="Bold" Background="#FFBDC0C9"/>
         <UniformGrid Name="setka" Margin="0,0,0,10">
-            
+
 
         </UniformGrid>
 

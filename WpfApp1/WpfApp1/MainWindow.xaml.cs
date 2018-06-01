@@ -23,13 +23,13 @@ namespace WpfApp1
         BitmapImage mine;
         CGenerator gen = new CGenerator();
         int h = 0;
-        int q = 7;
+        int q = 5;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            mine = new BitmapImage(new Uri(@"pack://application:,,,/img/bomb.jpg", UriKind.Absolute));
+            mine = new BitmapImage(new Uri(@"pack://application:,,,/img/bomb.png", UriKind.Absolute));
         }
 
 
@@ -48,13 +48,13 @@ namespace WpfApp1
             setka.Rows = 5;
             setka.Columns = 5;
             //указываются размеры сетки (число ячеек * (размер кнопки в ячейки + толщина её границ))
-            setka.Width = 5 * (50 + 4);
-            setka.Height = 5 * (50 + 4);
+            setka.Width = 5 * (70 + 4);
+            setka.Height = 5 * (70 + 4);
             //толщина границ сетки
             setka.Margin = new Thickness(3);
 
-            this.Width = 5 * 70;
-            this.Height = 6 * 72;
+            this.Width = 5 * 80;
+            this.Height = 6 * 92;
 
             for (int i = 0; i < 5 * 5; i++)
             {
@@ -63,12 +63,13 @@ namespace WpfApp1
                 //запись номера кнопки
                 btn.Tag = i;
                 //установка размеров кнопки
-                btn.Width = 50;
-                btn.Height = 50;
+                btn.Width = 65;
+                //btn.Background = Brushes.CadetBlue;
+                btn.Height = 65;
                 //текст на кнопке
                 btn.Content = " ";
                 //толщина границ кнопки
-                btn.Margin = new Thickness(2);
+                btn.Margin = new Thickness(1);
                 //при нажатии кнопки, будет вызываться метод Btn_Click
                 btn.Click += Btn_Click; 
                 //добавление кнопки в сетку
@@ -97,30 +98,77 @@ namespace WpfApp1
                     {
 
                         //установка фона нажатой кнопки, цвета и размера шрифта
-                        (buts[i]).Background = Brushes.MediumPurple;
-                        (buts[i]).Foreground = Brushes.Red;
+                        (buts[i]).Background = Brushes.CadetBlue;
+                        (buts[i]).Foreground = Brushes.Bisque;
                         (buts[i]).FontSize = 23;
 
                         //запись в нажатую кнопку её номера
                         (buts[i]).Content = 0;
                         h++;
+                        if ((25 - h) == q)
+                        {
+                            if (MessageBox.Show("Победа! Продолжить?", "Конец игры", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                            {
+                                Environment.Exit(0);
+                            }
+                            else
+                            {
+                                setka.Children.Clear();
+                            }
+                        }
+
                     }
+                    if (gen.getCell(ind % 5, ind / 5) == 11 || gen.getCell(ind % 5, ind / 5) == 12 || gen.getCell(ind % 5, ind / 5) == 13 || gen.getCell(ind % 5, ind / 5) == 14 || gen.getCell(ind % 5, ind / 5) == 15)
+                    {
+
+                        //установка фона нажатой кнопки, цвета и размера шрифта
+                        (buts[i]).Background = Brushes.CadetBlue;
+                        (buts[i]).Foreground = Brushes.Bisque;
+                        (buts[i]).FontSize = 23;
+                        gen.field[ind % 5, ind / 5] -= 10;
+                        //запись в нажатую кнопку её номера
+                        (buts[i]).Content = gen.field[ind % 5, ind / 5];
+                        h++;
+                        if ((25 - h) == q)
+                        {
+                            if (MessageBox.Show("Победа! Продолжить?", "Конец игры", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                            {
+                                Environment.Exit(0);
+                            }
+                            else
+                            {
+                                setka.Children.Clear();
+                            }
+                        }
+
+                    }                 
                 }
-            } else
+            }
+            else
 
 
             if (gen.getCell(n % 5, n / 5) > 0)
             {
                 //установка фона нажатой кнопки, цвета и размера шрифта
-                ((Button)sender).Background = Brushes.MediumPurple;
-                ((Button)sender).Foreground = Brushes.Red;
+                ((Button)sender).Background = Brushes.CadetBlue;
+                ((Button)sender).Foreground = Brushes.Bisque;
                 ((Button)sender).FontSize = 23;
 
                 //запись в нажатую кнопку её номера
                 ((Button)sender).Content = gen.getCell(n % 5, n / 5);
 
                 h++;
-                if ((25 - h) == q) { MessageBox.Show("WIN!!!1!!!!111!"); }
+                if ((25 - h) == q)
+                {                    
+                    if (MessageBox.Show("Победа! Продолжить?", "Конец игры", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                    {
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        setka.Children.Clear();
+                    }
+                }
 
             } else
 
@@ -153,7 +201,14 @@ namespace WpfApp1
                     }
                     
                 }
-                MessageBox.Show("haHAA!");
+                if (MessageBox.Show("Вы проиграли!? Продолжить?", "Конец игры", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                {
+                    Environment.Exit(0);
+                }               
+                else
+                {
+                    setka.Children.Clear();
+                }
                 setka.IsEnabled = false;
 
 

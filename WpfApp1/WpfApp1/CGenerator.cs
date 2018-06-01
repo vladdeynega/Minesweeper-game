@@ -127,24 +127,69 @@ namespace WpfApp1
             return field[i, j];
         }
 
-        public bool minesCheck()
-        {
-            bool res = true;
 
-            return res;
-        }
 
         public void reveal(int i, int j)
         {
-            if (i >= 0 && j >= 0 && i < (field.GetLength(0) ) && j < (field.GetLength(1)))
-                if(field[i, j] == 0)
+            if (i >= 0 && j >= 0 && i < (field.GetLength(0)) && j < (field.GetLength(1)))
+                if (field[i, j] == 0)
                 {
                     field[i, j] = 10;
 
-                    reveal(i, j-1);
-                    reveal(i-1, j);
-                    reveal(i, j+1);
-                    reveal(i+1, j);
+                    reveal(i, j - 1);
+                    reveal(i - 1, j);
+                    reveal(i, j + 1);
+                    reveal(i + 1, j);
+                    reveal(i + 1, j+1);
+                    reveal(i - 1, j-1);
+                    reveal(i + 1, j-1);
+                    reveal(i - 1, j+1);
+
+                }
+                else if (field[i, j] == 1)
+                {
+                    field[i, j] = 11;
+
+                    //reveal(i, j - 1);
+                    //reveal(i - 1, j);
+                    //reveal(i, j + 1);
+                    //reveal(i + 1, j);
+                }
+                else if (field[i, j] == 2)
+                {
+                    field[i, j] = 12;
+
+                    //reveal(i, j - 1);
+                    //reveal(i - 1, j);
+                    //reveal(i, j + 1);
+                    //reveal(i + 1, j);
+                }
+                else if (field[i, j] == 3)
+                {
+                    field[i, j] = 13;
+
+                    //reveal(i, j - 1);
+                    //reveal(i - 1, j);
+                    //reveal(i, j + 1);
+                    //reveal(i + 1, j);
+                }
+                else if (field[i, j] == 4)
+                {
+                    field[i, j] = 14;
+
+                    //reveal(i, j - 1);
+                    //reveal(i - 1, j);
+                    //reveal(i, j + 1);
+                    //reveal(i + 1, j);
+                }
+                else if (field[i, j] == 5)
+                {
+                    field[i, j] = 15;
+
+                    //reveal(i, j - 1);
+                    //reveal(i - 1, j);
+                    //reveal(i, j + 1);
+                    //reveal(i + 1, j);
                 }
         }
 

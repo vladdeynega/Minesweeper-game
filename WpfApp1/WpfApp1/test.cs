@@ -17,13 +17,13 @@ namespace WpfApp1
 
             gen.field = new int[,] { 
                 { -1, -1,  0,  0,  0 },
-                { -1, -1, -1, -1,  0 },
+                { -1, -1, -1, 0,  0 },
                 {  0, -1, -1, -1,  0 },
                 {  0, -1, -1, -1,  0 } };
 
             Assert.AreEqual(true, gen.isBroken(0, 0));
-            Assert.AreEqual(false, gen.isBroken(1, 0));
-            Assert.AreEqual(true, gen.isBroken(2, 2));
+            Assert.AreEqual(false, gen.isBroken(1, 1));
+            Assert.AreEqual(false, gen.isBroken(2, 2));
 
             var ex = Assert.Throws<ArgumentException>(() => gen.isBroken(-1, 15));
             Assert.That(ex.Message, Is.EqualTo("ВЫХОД ЗА ГРАНИЦУ"));
@@ -68,5 +68,66 @@ namespace WpfApp1
             
 
         }
+        [TestCase]
+        public void reveal()
+        {
+            CGenerator gen = new CGenerator();
+
+            gen.field = new int[,] {
+                { -1, -1,  0,  0,  0 },
+                { -1, -1, -1, -1,  0 },
+                {  0, -1, -1, -1,  0 },
+                {  0, -1, -1, -1,  0 } };
+
+            gen.reveal(3, 3);
+            Assert.AreEqual(-1, gen.field[3,3]);
+            
+
+            
+
+        }
+
+
+        [TestCase]
+        public void calculate()
+        {
+            CGenerator gen = new CGenerator();
+
+            gen.field = new int[,] {
+                { -1, -1,  0,  0,  0 },
+                { -1, -1, -1, -1,  0 },
+                {  0, -1, -1, -1,  0 },
+                {  0, -1, -1, -1,  0 } };
+
+            gen.calculate();
+            Assert.AreEqual(4, gen.field[0, 2]);
+            Assert.AreEqual(2, gen.field[0, 3]);
+            Assert.AreEqual(2, gen.field[3, 0]);
+
+
+
+
+        }
+        [TestCase]
+        public void getCell()
+        {
+            CGenerator gen = new CGenerator();
+
+            gen.field = new int[,] {
+                { -1, -1,  0,  0,  0 },
+                { -1, -1,  0, -1,  0 },
+                {  0, -1, -1, -1,  0 },
+                {  0, -1, -1, -1,  0 } };
+
+            
+            Assert.AreEqual(gen.getCell(0,3), 0);
+           
+
+
+
+
+        }
+
     }
+
 }
